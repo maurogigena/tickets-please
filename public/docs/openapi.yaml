@@ -1,0 +1,2806 @@
+openapi: 3.0.3
+info:
+  title: 'Tickets Please API Documentation'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+tags:
+  -
+    name: Authentication
+    description: ''
+  -
+    name: Endpoints
+    description: ''
+  -
+    name: 'Managing Tickets by Author'
+    description: ''
+  -
+    name: 'Manging Tickets'
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: 'You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.'
+security:
+  -
+    default: []
+paths:
+  /api/login:
+    post:
+      summary: Login
+      operationId: login
+      description: "Authenticates the user and returns the user's API Token."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    token: '{YOUR_AUTH_KEY}'
+                  message: Authenticated
+                  status: 200
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: '{YOUR_AUTH_KEY}'
+                  message:
+                    type: string
+                    example: Authenticated
+                  status:
+                    type: integer
+                    example: 200
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: qkunze@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: 'Must be at least 8 characters.'
+                  example: 'Z5ij-e/dl4m{o,'
+                  nullable: false
+              required:
+                - email
+                - password
+      security: []
+  /api/logout:
+    post:
+      summary: Logout
+      operationId: logout
+      description: "Signs out the user and destroy's the API Token."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {  }
+                properties: {  }
+      tags:
+        - Authentication
+  /api/user:
+    get:
+      summary: ''
+      operationId: getApiUser
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 11
+                  name: 'The Manager'
+                  email: manager@manager.com
+                  email_verified_at: null
+                  is_manager: true
+                  created_at: '2025-04-29T13:23:33.000000Z'
+                  updated_at: '2025-04-29T13:23:33.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 11
+                  name:
+                    type: string
+                    example: 'The Manager'
+                  email:
+                    type: string
+                    example: manager@manager.com
+                  email_verified_at:
+                    type: string
+                    example: null
+                  is_manager:
+                    type: boolean
+                    example: true
+                  created_at:
+                    type: string
+                    example: '2025-04-29T13:23:33.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2025-04-29T13:23:33.000000Z'
+      tags:
+        - Endpoints
+  '/api/v1/tickets/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    type: ticket
+                    id: 1
+                    attributes:
+                      title: 'ut ea officia'
+                      description: 'Accusamus quia amet voluptatem impedit molestiae quia quidem. Suscipit quia aliquam eaque et. Totam occaecati molestiae laboriosam. Impedit nam ut inventore.'
+                      status: X
+                      createdAt: '2025-04-29T13:23:32.000000Z'
+                      updatedAt: '2025-04-29T13:33:25.000000Z'
+                    relationships:
+                      data:
+                        type: user
+                        id: 6
+                      links:
+                        self: 'http://localhost/api/v1/authors/6'
+                    links:
+                      self: 'http://localhost/api/v1/tickets/1'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        example: ticket
+                      id:
+                        type: integer
+                        example: 1
+                      attributes:
+                        type: object
+                        properties:
+                          title:
+                            type: string
+                            example: 'ut ea officia'
+                          description:
+                            type: string
+                            example: 'Accusamus quia amet voluptatem impedit molestiae quia quidem. Suscipit quia aliquam eaque et. Totam occaecati molestiae laboriosam. Impedit nam ut inventore.'
+                          status:
+                            type: string
+                            example: X
+                          createdAt:
+                            type: string
+                            example: '2025-04-29T13:23:32.000000Z'
+                          updatedAt:
+                            type: string
+                            example: '2025-04-29T13:33:25.000000Z'
+                      relationships:
+                        type: object
+                        properties:
+                          data:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                                example: user
+                              id:
+                                type: integer
+                                example: 6
+                          links:
+                            type: object
+                            properties:
+                              self:
+                                type: string
+                                example: 'http://localhost/api/v1/authors/6'
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                            example: 'http://localhost/api/v1/tickets/1'
+      tags:
+        - Endpoints
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the ticket.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/api/v1/tickets/{ticket_id}':
+    put:
+      summary: ''
+      operationId: putApiV1TicketsTicket_id
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: ''
+                  example: []
+                  nullable: false
+                  properties:
+                    attributes:
+                      type: object
+                      description: ''
+                      example: []
+                      nullable: false
+                      properties:
+                        title:
+                          type: string
+                          description: ''
+                          example: consequatur
+                          nullable: false
+                        description:
+                          type: string
+                          description: ''
+                          example: 'Dolores dolorum amet iste laborum eius est dolor.'
+                          nullable: false
+                        status:
+                          type: string
+                          description: ''
+                          example: A
+                          nullable: false
+                          enum:
+                            - A
+                            - C
+                            - H
+                            - X
+                      required:
+                        - title
+                        - description
+                        - status
+                    relationships:
+                      type: object
+                      description: ''
+                      example: []
+                      nullable: false
+                      properties:
+                        author:
+                          type: object
+                          description: ''
+                          example: []
+                          nullable: false
+                          properties:
+                            data:
+                              type: object
+                              description: ''
+                              example: []
+                              nullable: false
+                              properties:
+                                id:
+                                  type: integer
+                                  description: ''
+                                  example: 17
+                                  nullable: false
+                              required:
+                                - id
+    patch:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: ''
+                  example: []
+                  nullable: false
+                  properties:
+                    attributes:
+                      type: object
+                      description: ''
+                      example: []
+                      nullable: false
+                      properties:
+                        title:
+                          type: string
+                          description: ''
+                          example: consequatur
+                          nullable: false
+                        description:
+                          type: string
+                          description: ''
+                          example: 'Dolores dolorum amet iste laborum eius est dolor.'
+                          nullable: false
+                        status:
+                          type: string
+                          description: ''
+                          example: X
+                          nullable: false
+                          enum:
+                            - A
+                            - C
+                            - H
+                            - X
+                    relationships:
+                      type: object
+                      description: ''
+                      example: []
+                      nullable: false
+                      properties:
+                        author:
+                          type: object
+                          description: ''
+                          example: []
+                          nullable: false
+                          properties:
+                            data:
+                              type: object
+                              description: ''
+                              example: []
+                              nullable: false
+                              properties:
+                                id:
+                                  type: string
+                                  description: ''
+                                  example: null
+                                  nullable: false
+    parameters:
+      -
+        in: path
+        name: ticket_id
+        description: 'The ID of the ticket.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/v1/users:
+    get:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      type: user
+                      id: 1
+                      attributes:
+                        name: 'Kenya Muller'
+                        email: lindsey.wiza@example.org
+                        isManager: false
+                      links:
+                        self: 'http://localhost/api/v1/authors/1'
+                    -
+                      type: user
+                      id: 2
+                      attributes:
+                        name: 'Winona Jacobs'
+                        email: wgislason@example.org
+                        isManager: false
+                      links:
+                        self: 'http://localhost/api/v1/authors/2'
+                    -
+                      type: user
+                      id: 3
+                      attributes:
+                        name: 'Dr. Name Wolff III'
+                        email: ohara.joanie@example.com
+                        isManager: false
+                      links:
+                        self: 'http://localhost/api/v1/authors/3'
+                    -
+                      type: user
+                      id: 4
+                      attributes:
+                        name: 'Ayana Dicki Jr.'
+                        email: psmith@example.org
+                        isManager: false
+                      links:
+                        self: 'http://localhost/api/v1/authors/4'
+                    -
+                      type: user
+                      id: 5
+                      attributes:
+                        name: 'Miss Teagan Torp DDS'
+                        email: price.lea@example.net
+                        isManager: false
+                      links:
+                        self: 'http://localhost/api/v1/authors/5'
+                    -
+                      type: user
+                      id: 6
+                      attributes:
+                        name: 'Jeanne Nader Jr.'
+                        email: kuhic.erica@example.net
+                        isManager: false
+                      links:
+                        self: 'http://localhost/api/v1/authors/6'
+                    -
+                      type: user
+                      id: 7
+                      attributes:
+                        name: 'Abbigail Greenfelder'
+                        email: borer.cierra@example.org
+                        isManager: false
+                      links:
+                        self: 'http://localhost/api/v1/authors/7'
+                    -
+                      type: user
+                      id: 8
+                      attributes:
+                        name: 'Elisha Hills'
+                        email: forrest.lueilwitz@example.org
+                        isManager: false
+                      links:
+                        self: 'http://localhost/api/v1/authors/8'
+                    -
+                      type: user
+                      id: 9
+                      attributes:
+                        name: 'Herta Lowe'
+                        email: stoy@example.com
+                        isManager: false
+                      links:
+                        self: 'http://localhost/api/v1/authors/9'
+                    -
+                      type: user
+                      id: 10
+                      attributes:
+                        name: 'Mathias Lehner DDS'
+                        email: else.rice@example.com
+                        isManager: false
+                      links:
+                        self: 'http://localhost/api/v1/authors/10'
+                    -
+                      type: user
+                      id: 11
+                      attributes:
+                        name: 'The Manager'
+                        email: manager@manager.com
+                        isManager: true
+                      links:
+                        self: 'http://localhost/api/v1/authors/11'
+                  links:
+                    first: 'http://localhost/api/v1/users?page=1'
+                    last: 'http://localhost/api/v1/users?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/users?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://localhost/api/v1/users'
+                    per_page: 15
+                    to: 11
+                    total: 11
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        type: user
+                        id: 1
+                        attributes:
+                          name: 'Kenya Muller'
+                          email: lindsey.wiza@example.org
+                          isManager: false
+                        links:
+                          self: 'http://localhost/api/v1/authors/1'
+                      -
+                        type: user
+                        id: 2
+                        attributes:
+                          name: 'Winona Jacobs'
+                          email: wgislason@example.org
+                          isManager: false
+                        links:
+                          self: 'http://localhost/api/v1/authors/2'
+                      -
+                        type: user
+                        id: 3
+                        attributes:
+                          name: 'Dr. Name Wolff III'
+                          email: ohara.joanie@example.com
+                          isManager: false
+                        links:
+                          self: 'http://localhost/api/v1/authors/3'
+                      -
+                        type: user
+                        id: 4
+                        attributes:
+                          name: 'Ayana Dicki Jr.'
+                          email: psmith@example.org
+                          isManager: false
+                        links:
+                          self: 'http://localhost/api/v1/authors/4'
+                      -
+                        type: user
+                        id: 5
+                        attributes:
+                          name: 'Miss Teagan Torp DDS'
+                          email: price.lea@example.net
+                          isManager: false
+                        links:
+                          self: 'http://localhost/api/v1/authors/5'
+                      -
+                        type: user
+                        id: 6
+                        attributes:
+                          name: 'Jeanne Nader Jr.'
+                          email: kuhic.erica@example.net
+                          isManager: false
+                        links:
+                          self: 'http://localhost/api/v1/authors/6'
+                      -
+                        type: user
+                        id: 7
+                        attributes:
+                          name: 'Abbigail Greenfelder'
+                          email: borer.cierra@example.org
+                          isManager: false
+                        links:
+                          self: 'http://localhost/api/v1/authors/7'
+                      -
+                        type: user
+                        id: 8
+                        attributes:
+                          name: 'Elisha Hills'
+                          email: forrest.lueilwitz@example.org
+                          isManager: false
+                        links:
+                          self: 'http://localhost/api/v1/authors/8'
+                      -
+                        type: user
+                        id: 9
+                        attributes:
+                          name: 'Herta Lowe'
+                          email: stoy@example.com
+                          isManager: false
+                        links:
+                          self: 'http://localhost/api/v1/authors/9'
+                      -
+                        type: user
+                        id: 10
+                        attributes:
+                          name: 'Mathias Lehner DDS'
+                          email: else.rice@example.com
+                          isManager: false
+                        links:
+                          self: 'http://localhost/api/v1/authors/10'
+                      -
+                        type: user
+                        id: 11
+                        attributes:
+                          name: 'The Manager'
+                          email: manager@manager.com
+                          isManager: true
+                        links:
+                          self: 'http://localhost/api/v1/authors/11'
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          example: user
+                        id:
+                          type: integer
+                          example: 1
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: 'Kenya Muller'
+                            email:
+                              type: string
+                              example: lindsey.wiza@example.org
+                            isManager:
+                              type: boolean
+                              example: false
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                              example: 'http://localhost/api/v1/authors/1'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://localhost/api/v1/users?page=1'
+                      last:
+                        type: string
+                        example: 'http://localhost/api/v1/users?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/users?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://localhost/api/v1/users'
+                      per_page:
+                        type: integer
+                        example: 15
+                      to:
+                        type: integer
+                        example: 11
+                      total:
+                        type: integer
+                        example: 11
+      tags:
+        - Endpoints
+    post:
+      summary: 'Store a newly created resource in storage.'
+      operationId: storeANewlyCreatedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: ''
+                  example: []
+                  nullable: false
+                  properties:
+                    attributes:
+                      type: object
+                      description: ''
+                      example: []
+                      nullable: false
+                      properties:
+                        name:
+                          type: string
+                          description: ''
+                          example: consequatur
+                          nullable: false
+                        email:
+                          type: string
+                          description: 'Must be a valid email address.'
+                          example: carolyne.luettgen@example.org
+                          nullable: false
+                        isManager:
+                          type: boolean
+                          description: ''
+                          example: true
+                          nullable: false
+                        password:
+                          type: string
+                          description: ''
+                          example: 'O[2UZ5ij-e/dl4m{o,'
+                          nullable: false
+                      required:
+                        - name
+                        - email
+                        - isManager
+                        - password
+  '/api/v1/users/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    type: user
+                    id: 1
+                    attributes:
+                      name: 'Kenya Muller'
+                      email: lindsey.wiza@example.org
+                      isManager: false
+                    links:
+                      self: 'http://localhost/api/v1/authors/1'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        example: user
+                      id:
+                        type: integer
+                        example: 1
+                      attributes:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: 'Kenya Muller'
+                          email:
+                            type: string
+                            example: lindsey.wiza@example.org
+                          isManager:
+                            type: boolean
+                            example: false
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                            example: 'http://localhost/api/v1/authors/1'
+      tags:
+        - Endpoints
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the user.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/api/v1/users/{user_id}':
+    put:
+      summary: ''
+      operationId: putApiV1UsersUser_id
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: ''
+                  example: []
+                  nullable: false
+                  properties:
+                    attributes:
+                      type: object
+                      description: ''
+                      example: []
+                      nullable: false
+                      properties:
+                        name:
+                          type: string
+                          description: ''
+                          example: consequatur
+                          nullable: false
+                        email:
+                          type: string
+                          description: 'Must be a valid email address.'
+                          example: carolyne.luettgen@example.org
+                          nullable: false
+                        isManager:
+                          type: boolean
+                          description: ''
+                          example: true
+                          nullable: false
+                        password:
+                          type: string
+                          description: ''
+                          example: 'O[2UZ5ij-e/dl4m{o,'
+                          nullable: false
+                      required:
+                        - name
+                        - email
+                        - isManager
+                        - password
+    patch:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: ''
+                  example: []
+                  nullable: false
+                  properties:
+                    attributes:
+                      type: object
+                      description: ''
+                      example: []
+                      nullable: false
+                      properties:
+                        name:
+                          type: string
+                          description: ''
+                          example: consequatur
+                          nullable: false
+                        email:
+                          type: string
+                          description: 'Must be a valid email address.'
+                          example: carolyne.luettgen@example.org
+                          nullable: false
+                        isManager:
+                          type: boolean
+                          description: ''
+                          example: true
+                          nullable: false
+                        password:
+                          type: string
+                          description: ''
+                          example: 'O[2UZ5ij-e/dl4m{o,'
+                          nullable: false
+    parameters:
+      -
+        in: path
+        name: user_id
+        description: 'The ID of the user.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/v1/authors:
+    get:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      type: user
+                      id: 6
+                      attributes:
+                        name: 'Jeanne Nader Jr.'
+                        email: kuhic.erica@example.net
+                        isManager: false
+                        emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                        createdAt: '2025-04-29T13:23:32.000000Z'
+                        updadedAt: '2025-04-29T13:23:32.000000Z'
+                      links:
+                        self: 'http://localhost/api/v1/authors/6'
+                    -
+                      type: user
+                      id: 5
+                      attributes:
+                        name: 'Miss Teagan Torp DDS'
+                        email: price.lea@example.net
+                        isManager: false
+                        emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                        createdAt: '2025-04-29T13:23:32.000000Z'
+                        updadedAt: '2025-04-29T13:23:32.000000Z'
+                      links:
+                        self: 'http://localhost/api/v1/authors/5'
+                    -
+                      type: user
+                      id: 4
+                      attributes:
+                        name: 'Ayana Dicki Jr.'
+                        email: psmith@example.org
+                        isManager: false
+                        emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                        createdAt: '2025-04-29T13:23:32.000000Z'
+                        updadedAt: '2025-04-29T13:23:32.000000Z'
+                      links:
+                        self: 'http://localhost/api/v1/authors/4'
+                    -
+                      type: user
+                      id: 9
+                      attributes:
+                        name: 'Herta Lowe'
+                        email: stoy@example.com
+                        isManager: false
+                        emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                        createdAt: '2025-04-29T13:23:32.000000Z'
+                        updadedAt: '2025-04-29T13:23:32.000000Z'
+                      links:
+                        self: 'http://localhost/api/v1/authors/9'
+                    -
+                      type: user
+                      id: 1
+                      attributes:
+                        name: 'Kenya Muller'
+                        email: lindsey.wiza@example.org
+                        isManager: false
+                        emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                        createdAt: '2025-04-29T13:23:32.000000Z'
+                        updadedAt: '2025-04-29T13:23:32.000000Z'
+                      links:
+                        self: 'http://localhost/api/v1/authors/1'
+                    -
+                      type: user
+                      id: 2
+                      attributes:
+                        name: 'Winona Jacobs'
+                        email: wgislason@example.org
+                        isManager: false
+                        emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                        createdAt: '2025-04-29T13:23:32.000000Z'
+                        updadedAt: '2025-04-29T13:23:32.000000Z'
+                      links:
+                        self: 'http://localhost/api/v1/authors/2'
+                    -
+                      type: user
+                      id: 3
+                      attributes:
+                        name: 'Dr. Name Wolff III'
+                        email: ohara.joanie@example.com
+                        isManager: false
+                        emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                        createdAt: '2025-04-29T13:23:32.000000Z'
+                        updadedAt: '2025-04-29T13:23:32.000000Z'
+                      links:
+                        self: 'http://localhost/api/v1/authors/3'
+                    -
+                      type: user
+                      id: 8
+                      attributes:
+                        name: 'Elisha Hills'
+                        email: forrest.lueilwitz@example.org
+                        isManager: false
+                        emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                        createdAt: '2025-04-29T13:23:32.000000Z'
+                        updadedAt: '2025-04-29T13:23:32.000000Z'
+                      links:
+                        self: 'http://localhost/api/v1/authors/8'
+                    -
+                      type: user
+                      id: 10
+                      attributes:
+                        name: 'Mathias Lehner DDS'
+                        email: else.rice@example.com
+                        isManager: false
+                        emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                        createdAt: '2025-04-29T13:23:32.000000Z'
+                        updadedAt: '2025-04-29T13:23:32.000000Z'
+                      links:
+                        self: 'http://localhost/api/v1/authors/10'
+                    -
+                      type: user
+                      id: 7
+                      attributes:
+                        name: 'Abbigail Greenfelder'
+                        email: borer.cierra@example.org
+                        isManager: false
+                        emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                        createdAt: '2025-04-29T13:23:32.000000Z'
+                        updadedAt: '2025-04-29T13:23:32.000000Z'
+                      links:
+                        self: 'http://localhost/api/v1/authors/7'
+                  links:
+                    first: 'http://localhost/api/v1/authors?page=1'
+                    last: 'http://localhost/api/v1/authors?page=7'
+                    prev: null
+                    next: 'http://localhost/api/v1/authors?page=2'
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 7
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/authors?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: 'http://localhost/api/v1/authors?page=2'
+                        label: '2'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/authors?page=3'
+                        label: '3'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/authors?page=4'
+                        label: '4'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/authors?page=5'
+                        label: '5'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/authors?page=6'
+                        label: '6'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/authors?page=7'
+                        label: '7'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/authors?page=2'
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://localhost/api/v1/authors'
+                    per_page: 15
+                    to: 10
+                    total: 102
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        type: user
+                        id: 6
+                        attributes:
+                          name: 'Jeanne Nader Jr.'
+                          email: kuhic.erica@example.net
+                          isManager: false
+                          emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                          createdAt: '2025-04-29T13:23:32.000000Z'
+                          updadedAt: '2025-04-29T13:23:32.000000Z'
+                        links:
+                          self: 'http://localhost/api/v1/authors/6'
+                      -
+                        type: user
+                        id: 5
+                        attributes:
+                          name: 'Miss Teagan Torp DDS'
+                          email: price.lea@example.net
+                          isManager: false
+                          emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                          createdAt: '2025-04-29T13:23:32.000000Z'
+                          updadedAt: '2025-04-29T13:23:32.000000Z'
+                        links:
+                          self: 'http://localhost/api/v1/authors/5'
+                      -
+                        type: user
+                        id: 4
+                        attributes:
+                          name: 'Ayana Dicki Jr.'
+                          email: psmith@example.org
+                          isManager: false
+                          emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                          createdAt: '2025-04-29T13:23:32.000000Z'
+                          updadedAt: '2025-04-29T13:23:32.000000Z'
+                        links:
+                          self: 'http://localhost/api/v1/authors/4'
+                      -
+                        type: user
+                        id: 9
+                        attributes:
+                          name: 'Herta Lowe'
+                          email: stoy@example.com
+                          isManager: false
+                          emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                          createdAt: '2025-04-29T13:23:32.000000Z'
+                          updadedAt: '2025-04-29T13:23:32.000000Z'
+                        links:
+                          self: 'http://localhost/api/v1/authors/9'
+                      -
+                        type: user
+                        id: 1
+                        attributes:
+                          name: 'Kenya Muller'
+                          email: lindsey.wiza@example.org
+                          isManager: false
+                          emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                          createdAt: '2025-04-29T13:23:32.000000Z'
+                          updadedAt: '2025-04-29T13:23:32.000000Z'
+                        links:
+                          self: 'http://localhost/api/v1/authors/1'
+                      -
+                        type: user
+                        id: 2
+                        attributes:
+                          name: 'Winona Jacobs'
+                          email: wgislason@example.org
+                          isManager: false
+                          emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                          createdAt: '2025-04-29T13:23:32.000000Z'
+                          updadedAt: '2025-04-29T13:23:32.000000Z'
+                        links:
+                          self: 'http://localhost/api/v1/authors/2'
+                      -
+                        type: user
+                        id: 3
+                        attributes:
+                          name: 'Dr. Name Wolff III'
+                          email: ohara.joanie@example.com
+                          isManager: false
+                          emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                          createdAt: '2025-04-29T13:23:32.000000Z'
+                          updadedAt: '2025-04-29T13:23:32.000000Z'
+                        links:
+                          self: 'http://localhost/api/v1/authors/3'
+                      -
+                        type: user
+                        id: 8
+                        attributes:
+                          name: 'Elisha Hills'
+                          email: forrest.lueilwitz@example.org
+                          isManager: false
+                          emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                          createdAt: '2025-04-29T13:23:32.000000Z'
+                          updadedAt: '2025-04-29T13:23:32.000000Z'
+                        links:
+                          self: 'http://localhost/api/v1/authors/8'
+                      -
+                        type: user
+                        id: 10
+                        attributes:
+                          name: 'Mathias Lehner DDS'
+                          email: else.rice@example.com
+                          isManager: false
+                          emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                          createdAt: '2025-04-29T13:23:32.000000Z'
+                          updadedAt: '2025-04-29T13:23:32.000000Z'
+                        links:
+                          self: 'http://localhost/api/v1/authors/10'
+                      -
+                        type: user
+                        id: 7
+                        attributes:
+                          name: 'Abbigail Greenfelder'
+                          email: borer.cierra@example.org
+                          isManager: false
+                          emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                          createdAt: '2025-04-29T13:23:32.000000Z'
+                          updadedAt: '2025-04-29T13:23:32.000000Z'
+                        links:
+                          self: 'http://localhost/api/v1/authors/7'
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          example: user
+                        id:
+                          type: integer
+                          example: 6
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: 'Jeanne Nader Jr.'
+                            email:
+                              type: string
+                              example: kuhic.erica@example.net
+                            isManager:
+                              type: boolean
+                              example: false
+                            emailVerifiedAt:
+                              type: string
+                              example: '2025-04-29T13:23:32.000000Z'
+                            createdAt:
+                              type: string
+                              example: '2025-04-29T13:23:32.000000Z'
+                            updadedAt:
+                              type: string
+                              example: '2025-04-29T13:23:32.000000Z'
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                              example: 'http://localhost/api/v1/authors/6'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://localhost/api/v1/authors?page=1'
+                      last:
+                        type: string
+                        example: 'http://localhost/api/v1/authors?page=7'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: 'http://localhost/api/v1/authors?page=2'
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 7
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/authors?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: 'http://localhost/api/v1/authors?page=2'
+                            label: '2'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/authors?page=3'
+                            label: '3'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/authors?page=4'
+                            label: '4'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/authors?page=5'
+                            label: '5'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/authors?page=6'
+                            label: '6'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/authors?page=7'
+                            label: '7'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/authors?page=2'
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://localhost/api/v1/authors'
+                      per_page:
+                        type: integer
+                        example: 15
+                      to:
+                        type: integer
+                        example: 10
+                      total:
+                        type: integer
+                        example: 102
+      tags:
+        - Endpoints
+  '/api/v1/authors/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    type: user
+                    id: 1
+                    attributes:
+                      name: 'Kenya Muller'
+                      email: lindsey.wiza@example.org
+                      isManager: false
+                      emailVerifiedAt: '2025-04-29T13:23:32.000000Z'
+                      createdAt: '2025-04-29T13:23:32.000000Z'
+                      updadedAt: '2025-04-29T13:23:32.000000Z'
+                    links:
+                      self: 'http://localhost/api/v1/authors/1'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        example: user
+                      id:
+                        type: integer
+                        example: 1
+                      attributes:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: 'Kenya Muller'
+                          email:
+                            type: string
+                            example: lindsey.wiza@example.org
+                          isManager:
+                            type: boolean
+                            example: false
+                          emailVerifiedAt:
+                            type: string
+                            example: '2025-04-29T13:23:32.000000Z'
+                          createdAt:
+                            type: string
+                            example: '2025-04-29T13:23:32.000000Z'
+                          updadedAt:
+                            type: string
+                            example: '2025-04-29T13:23:32.000000Z'
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                            example: 'http://localhost/api/v1/authors/1'
+      tags:
+        - Endpoints
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the author.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/api/v1/authors/{author_id}/tickets':
+    post:
+      summary: 'Store a new ticket for a specific author.'
+      operationId: storeANewTicketForASpecificAuthor
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: ''
+                  example: []
+                  nullable: false
+                  properties:
+                    attributes:
+                      type: object
+                      description: ''
+                      example: []
+                      nullable: false
+                      properties:
+                        title:
+                          type: string
+                          description: 'The title of the ticket.'
+                          example: 'Bug in login'
+                          nullable: false
+                        description:
+                          type: string
+                          description: 'A description of the issue.'
+                          example: 'Login fails with error 500.'
+                          nullable: false
+                        status:
+                          type: string
+                          description: 'Must be one of A, C, H, X.'
+                          example: A
+                          nullable: false
+                      required:
+                        - title
+                        - description
+                        - status
+                  required:
+                    - attributes
+                author:
+                  type: integer
+                  description: 'The author assigned to the ticket. The <code>id</code> of an existing record in the users table.'
+                  example: 0
+                  nullable: false
+              required:
+                - data
+                - author
+    get:
+      summary: 'Get all tickets'
+      operationId: getAllTickets
+      description: 'Retrieves all tickets created by a specific user.'
+      parameters:
+        -
+          in: query
+          name: sort
+          description: 'Data field(s) to sort by. Separate multiple fields with commas. Denote descending sort with a minus sign.'
+          example: sort=name
+          required: false
+          schema:
+            type: string
+            description: 'Data field(s) to sort by. Separate multiple fields with commas. Denote descending sort with a minus sign.'
+            example: sort=name
+            nullable: false
+        -
+          in: query
+          name: 'filter[name]'
+          description: 'Filter by name. Wildcards are supported.'
+          example: consequatur
+          required: false
+          schema:
+            type: string
+            description: 'Filter by name. Wildcards are supported.'
+            example: consequatur
+            nullable: false
+        -
+          in: query
+          name: 'filter[email]'
+          description: 'Filter by email. Wildcards are supported.'
+          example: consequatur
+          required: false
+          schema:
+            type: string
+            description: 'Filter by email. Wildcards are supported.'
+            example: consequatur
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      type: user
+                      id: 3
+                      attributes:
+                        name: 'Mr. Henri Beatty MD'
+                        email: bmertz@example.net
+                        isManager: false
+                        emailVerifiedAt: '2024-03-14T04:41:51.000000Z'
+                        createdAt: '2024-03-14T04:41:51.000000Z'
+                        udpatedAt: '2024-03-14T04:41:51.000000Z'
+                      links:
+                        self: 'http://localhost:8000/api/v1/authors/3'
+                  links:
+                    first: 'http://localhost:8000/api/v1/authors?page=1'
+                    last: 'http://localhost:8000/api/v1/authors?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://localhost:8000/api/v1/authors?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://localhost:8000/api/v1/authors'
+                    per_page: 15
+                    to: 1
+                    total: 10
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        type: user
+                        id: 3
+                        attributes:
+                          name: 'Mr. Henri Beatty MD'
+                          email: bmertz@example.net
+                          isManager: false
+                          emailVerifiedAt: '2024-03-14T04:41:51.000000Z'
+                          createdAt: '2024-03-14T04:41:51.000000Z'
+                          udpatedAt: '2024-03-14T04:41:51.000000Z'
+                        links:
+                          self: 'http://localhost:8000/api/v1/authors/3'
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          example: user
+                        id:
+                          type: integer
+                          example: 3
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: 'Mr. Henri Beatty MD'
+                            email:
+                              type: string
+                              example: bmertz@example.net
+                            isManager:
+                              type: boolean
+                              example: false
+                            emailVerifiedAt:
+                              type: string
+                              example: '2024-03-14T04:41:51.000000Z'
+                            createdAt:
+                              type: string
+                              example: '2024-03-14T04:41:51.000000Z'
+                            udpatedAt:
+                              type: string
+                              example: '2024-03-14T04:41:51.000000Z'
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                              example: 'http://localhost:8000/api/v1/authors/3'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://localhost:8000/api/v1/authors?page=1'
+                      last:
+                        type: string
+                        example: 'http://localhost:8000/api/v1/authors?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://localhost:8000/api/v1/authors?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://localhost:8000/api/v1/authors'
+                      per_page:
+                        type: integer
+                        example: 15
+                      to:
+                        type: integer
+                        example: 1
+                      total:
+                        type: integer
+                        example: 10
+      tags:
+        - 'Managing Tickets by Author'
+    parameters:
+      -
+        in: path
+        name: author_id
+        description: 'The ID of the author.'
+        example: 123
+        required: true
+        schema:
+          type: integer
+  '/api/v1/authors/{author_id}/tickets/{id}':
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: author_id
+        description: 'The ID of the author.'
+        example: consequatur
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: id
+        description: 'The ID of the ticket.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/api/v1/authors/{author}/tickets/{ticket_id}':
+    put:
+      summary: ''
+      operationId: putApiV1AuthorsAuthorTicketsTicket_id
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: ''
+                  example: []
+                  nullable: false
+                  properties:
+                    attributes:
+                      type: object
+                      description: ''
+                      example: []
+                      nullable: false
+                      properties:
+                        title:
+                          type: string
+                          description: ''
+                          example: consequatur
+                          nullable: false
+                        description:
+                          type: string
+                          description: ''
+                          example: 'Dolores dolorum amet iste laborum eius est dolor.'
+                          nullable: false
+                        status:
+                          type: string
+                          description: ''
+                          example: A
+                          nullable: false
+                          enum:
+                            - A
+                            - C
+                            - H
+                            - X
+                      required:
+                        - title
+                        - description
+                        - status
+                    relationships:
+                      type: object
+                      description: ''
+                      example: []
+                      nullable: false
+                      properties:
+                        author:
+                          type: object
+                          description: ''
+                          example: []
+                          nullable: false
+                          properties:
+                            data:
+                              type: object
+                              description: ''
+                              example: []
+                              nullable: false
+                              properties:
+                                id:
+                                  type: integer
+                                  description: ''
+                                  example: 17
+                                  nullable: false
+                              required:
+                                - id
+    patch:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: ''
+                  example: []
+                  nullable: false
+                  properties:
+                    attributes:
+                      type: object
+                      description: ''
+                      example: []
+                      nullable: false
+                      properties:
+                        title:
+                          type: string
+                          description: ''
+                          example: consequatur
+                          nullable: false
+                        description:
+                          type: string
+                          description: ''
+                          example: 'Dolores dolorum amet iste laborum eius est dolor.'
+                          nullable: false
+                        status:
+                          type: string
+                          description: ''
+                          example: A
+                          nullable: false
+                          enum:
+                            - A
+                            - C
+                            - H
+                            - X
+                    relationships:
+                      type: object
+                      description: ''
+                      example: []
+                      nullable: false
+                      properties:
+                        author:
+                          type: object
+                          description: ''
+                          example: []
+                          nullable: false
+                          properties:
+                            data:
+                              type: object
+                              description: ''
+                              example: []
+                              nullable: false
+                              properties:
+                                id:
+                                  type: string
+                                  description: ''
+                                  example: null
+                                  nullable: false
+    parameters:
+      -
+        in: path
+        name: author
+        description: 'The author.'
+        example: consequatur
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: ticket_id
+        description: 'The ID of the ticket.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/v1/user:
+    get:
+      summary: ''
+      operationId: getApiV1User
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 11
+                  name: 'The Manager'
+                  email: manager@manager.com
+                  email_verified_at: null
+                  is_manager: true
+                  created_at: '2025-04-29T13:23:33.000000Z'
+                  updated_at: '2025-04-29T13:23:33.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 11
+                  name:
+                    type: string
+                    example: 'The Manager'
+                  email:
+                    type: string
+                    example: manager@manager.com
+                  email_verified_at:
+                    type: string
+                    example: null
+                  is_manager:
+                    type: boolean
+                    example: true
+                  created_at:
+                    type: string
+                    example: '2025-04-29T13:23:33.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2025-04-29T13:23:33.000000Z'
+      tags:
+        - Endpoints
+  /api/v1/tickets:
+    get:
+      summary: 'Get all tickets'
+      operationId: getAllTickets
+      description: ''
+      parameters:
+        -
+          in: query
+          name: sort
+          description: 'Data field(s) to sort by. Separate multiple fields with commas. Denote descending sort with a minus sign.'
+          example: 'sort=title,-createdAt'
+          required: false
+          schema:
+            type: string
+            description: 'Data field(s) to sort by. Separate multiple fields with commas. Denote descending sort with a minus sign.'
+            example: 'sort=title,-createdAt'
+            nullable: false
+        -
+          in: query
+          name: 'filter[status]'
+          description: 'Filter by status code: A, C, H, X.'
+          example: null
+          required: false
+          schema:
+            type: string
+            description: 'Filter by status code: A, C, H, X.'
+            example: null
+            nullable: false
+        -
+          in: query
+          name: 'filter[title]'
+          description: 'Filter by title. Wildcards are supported. Example *fix*'
+          example: consequatur
+          required: false
+          schema:
+            type: string
+            description: 'Filter by title. Wildcards are supported. Example *fix*'
+            example: consequatur
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      type: ticket
+                      id: 103
+                      attributes:
+                        title: dsadasd
+                        status: A
+                        createdAt: '2025-04-29T22:18:13.000000Z'
+                        updatedAt: '2025-04-29T22:18:13.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 1
+                        links:
+                          self: 'http://localhost/api/v1/authors/1'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/103'
+                    -
+                      type: ticket
+                      id: 101
+                      attributes:
+                        title: 'Replace this title'
+                        status: A
+                        createdAt: '2025-04-29T15:03:17.000000Z'
+                        updatedAt: '2025-04-29T15:03:17.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 1
+                        links:
+                          self: 'http://localhost/api/v1/authors/1'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/101'
+                    -
+                      type: ticket
+                      id: 45
+                      attributes:
+                        title: 'ea adipisci nostrum'
+                        status: X
+                        createdAt: '2025-04-29T13:23:33.000000Z'
+                        updatedAt: '2025-04-29T13:23:33.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 3
+                        links:
+                          self: 'http://localhost/api/v1/authors/3'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/45'
+                    -
+                      type: ticket
+                      id: 46
+                      attributes:
+                        title: 'dicta praesentium quia'
+                        status: A
+                        createdAt: '2025-04-29T13:23:33.000000Z'
+                        updatedAt: '2025-04-29T13:23:33.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 7
+                        links:
+                          self: 'http://localhost/api/v1/authors/7'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/46'
+                    -
+                      type: ticket
+                      id: 47
+                      attributes:
+                        title: 'est voluptatem nesciunt'
+                        status: C
+                        createdAt: '2025-04-29T13:23:33.000000Z'
+                        updatedAt: '2025-04-29T13:23:33.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 2
+                        links:
+                          self: 'http://localhost/api/v1/authors/2'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/47'
+                    -
+                      type: ticket
+                      id: 48
+                      attributes:
+                        title: 'cum nobis sapiente'
+                        status: C
+                        createdAt: '2025-04-29T13:23:33.000000Z'
+                        updatedAt: '2025-04-29T13:23:33.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 8
+                        links:
+                          self: 'http://localhost/api/v1/authors/8'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/48'
+                    -
+                      type: ticket
+                      id: 49
+                      attributes:
+                        title: 'ut blanditiis dolorem'
+                        status: A
+                        createdAt: '2025-04-29T13:23:33.000000Z'
+                        updatedAt: '2025-04-29T13:23:33.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 8
+                        links:
+                          self: 'http://localhost/api/v1/authors/8'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/49'
+                    -
+                      type: ticket
+                      id: 50
+                      attributes:
+                        title: 'voluptas consectetur magnam'
+                        status: C
+                        createdAt: '2025-04-29T13:23:33.000000Z'
+                        updatedAt: '2025-04-29T13:23:33.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 10
+                        links:
+                          self: 'http://localhost/api/v1/authors/10'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/50'
+                    -
+                      type: ticket
+                      id: 51
+                      attributes:
+                        title: 'enim quia autem'
+                        status: A
+                        createdAt: '2025-04-29T13:23:33.000000Z'
+                        updatedAt: '2025-04-29T13:23:33.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 10
+                        links:
+                          self: 'http://localhost/api/v1/authors/10'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/51'
+                    -
+                      type: ticket
+                      id: 52
+                      attributes:
+                        title: 'qui odit temporibus'
+                        status: H
+                        createdAt: '2025-04-29T13:23:33.000000Z'
+                        updatedAt: '2025-04-29T13:23:33.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 3
+                        links:
+                          self: 'http://localhost/api/v1/authors/3'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/52'
+                    -
+                      type: ticket
+                      id: 53
+                      attributes:
+                        title: 'tempore eos saepe'
+                        status: H
+                        createdAt: '2025-04-29T13:23:33.000000Z'
+                        updatedAt: '2025-04-29T13:23:33.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 7
+                        links:
+                          self: 'http://localhost/api/v1/authors/7'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/53'
+                    -
+                      type: ticket
+                      id: 54
+                      attributes:
+                        title: 'tempora repudiandae hic'
+                        status: H
+                        createdAt: '2025-04-29T13:23:33.000000Z'
+                        updatedAt: '2025-04-29T13:23:33.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 9
+                        links:
+                          self: 'http://localhost/api/v1/authors/9'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/54'
+                    -
+                      type: ticket
+                      id: 55
+                      attributes:
+                        title: 'veritatis omnis neque'
+                        status: H
+                        createdAt: '2025-04-29T13:23:33.000000Z'
+                        updatedAt: '2025-04-29T13:23:33.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 7
+                        links:
+                          self: 'http://localhost/api/v1/authors/7'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/55'
+                    -
+                      type: ticket
+                      id: 56
+                      attributes:
+                        title: 'eligendi quia labore'
+                        status: H
+                        createdAt: '2025-04-29T13:23:33.000000Z'
+                        updatedAt: '2025-04-29T13:23:33.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 8
+                        links:
+                          self: 'http://localhost/api/v1/authors/8'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/56'
+                    -
+                      type: ticket
+                      id: 57
+                      attributes:
+                        title: 'porro est ad'
+                        status: A
+                        createdAt: '2025-04-29T13:23:33.000000Z'
+                        updatedAt: '2025-04-29T13:23:33.000000Z'
+                      relationships:
+                        data:
+                          type: user
+                          id: 5
+                        links:
+                          self: 'http://localhost/api/v1/authors/5'
+                      links:
+                        self: 'http://localhost/api/v1/tickets/57'
+                  links:
+                    first: 'http://localhost/api/v1/tickets?page=1'
+                    last: 'http://localhost/api/v1/tickets?page=7'
+                    prev: null
+                    next: 'http://localhost/api/v1/tickets?page=2'
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 7
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/tickets?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: 'http://localhost/api/v1/tickets?page=2'
+                        label: '2'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/tickets?page=3'
+                        label: '3'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/tickets?page=4'
+                        label: '4'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/tickets?page=5'
+                        label: '5'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/tickets?page=6'
+                        label: '6'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/tickets?page=7'
+                        label: '7'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/tickets?page=2'
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://localhost/api/v1/tickets'
+                    per_page: 15
+                    to: 15
+                    total: 102
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        type: ticket
+                        id: 103
+                        attributes:
+                          title: dsadasd
+                          status: A
+                          createdAt: '2025-04-29T22:18:13.000000Z'
+                          updatedAt: '2025-04-29T22:18:13.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 1
+                          links:
+                            self: 'http://localhost/api/v1/authors/1'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/103'
+                      -
+                        type: ticket
+                        id: 101
+                        attributes:
+                          title: 'Replace this title'
+                          status: A
+                          createdAt: '2025-04-29T15:03:17.000000Z'
+                          updatedAt: '2025-04-29T15:03:17.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 1
+                          links:
+                            self: 'http://localhost/api/v1/authors/1'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/101'
+                      -
+                        type: ticket
+                        id: 45
+                        attributes:
+                          title: 'ea adipisci nostrum'
+                          status: X
+                          createdAt: '2025-04-29T13:23:33.000000Z'
+                          updatedAt: '2025-04-29T13:23:33.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 3
+                          links:
+                            self: 'http://localhost/api/v1/authors/3'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/45'
+                      -
+                        type: ticket
+                        id: 46
+                        attributes:
+                          title: 'dicta praesentium quia'
+                          status: A
+                          createdAt: '2025-04-29T13:23:33.000000Z'
+                          updatedAt: '2025-04-29T13:23:33.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 7
+                          links:
+                            self: 'http://localhost/api/v1/authors/7'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/46'
+                      -
+                        type: ticket
+                        id: 47
+                        attributes:
+                          title: 'est voluptatem nesciunt'
+                          status: C
+                          createdAt: '2025-04-29T13:23:33.000000Z'
+                          updatedAt: '2025-04-29T13:23:33.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 2
+                          links:
+                            self: 'http://localhost/api/v1/authors/2'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/47'
+                      -
+                        type: ticket
+                        id: 48
+                        attributes:
+                          title: 'cum nobis sapiente'
+                          status: C
+                          createdAt: '2025-04-29T13:23:33.000000Z'
+                          updatedAt: '2025-04-29T13:23:33.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 8
+                          links:
+                            self: 'http://localhost/api/v1/authors/8'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/48'
+                      -
+                        type: ticket
+                        id: 49
+                        attributes:
+                          title: 'ut blanditiis dolorem'
+                          status: A
+                          createdAt: '2025-04-29T13:23:33.000000Z'
+                          updatedAt: '2025-04-29T13:23:33.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 8
+                          links:
+                            self: 'http://localhost/api/v1/authors/8'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/49'
+                      -
+                        type: ticket
+                        id: 50
+                        attributes:
+                          title: 'voluptas consectetur magnam'
+                          status: C
+                          createdAt: '2025-04-29T13:23:33.000000Z'
+                          updatedAt: '2025-04-29T13:23:33.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 10
+                          links:
+                            self: 'http://localhost/api/v1/authors/10'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/50'
+                      -
+                        type: ticket
+                        id: 51
+                        attributes:
+                          title: 'enim quia autem'
+                          status: A
+                          createdAt: '2025-04-29T13:23:33.000000Z'
+                          updatedAt: '2025-04-29T13:23:33.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 10
+                          links:
+                            self: 'http://localhost/api/v1/authors/10'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/51'
+                      -
+                        type: ticket
+                        id: 52
+                        attributes:
+                          title: 'qui odit temporibus'
+                          status: H
+                          createdAt: '2025-04-29T13:23:33.000000Z'
+                          updatedAt: '2025-04-29T13:23:33.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 3
+                          links:
+                            self: 'http://localhost/api/v1/authors/3'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/52'
+                      -
+                        type: ticket
+                        id: 53
+                        attributes:
+                          title: 'tempore eos saepe'
+                          status: H
+                          createdAt: '2025-04-29T13:23:33.000000Z'
+                          updatedAt: '2025-04-29T13:23:33.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 7
+                          links:
+                            self: 'http://localhost/api/v1/authors/7'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/53'
+                      -
+                        type: ticket
+                        id: 54
+                        attributes:
+                          title: 'tempora repudiandae hic'
+                          status: H
+                          createdAt: '2025-04-29T13:23:33.000000Z'
+                          updatedAt: '2025-04-29T13:23:33.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 9
+                          links:
+                            self: 'http://localhost/api/v1/authors/9'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/54'
+                      -
+                        type: ticket
+                        id: 55
+                        attributes:
+                          title: 'veritatis omnis neque'
+                          status: H
+                          createdAt: '2025-04-29T13:23:33.000000Z'
+                          updatedAt: '2025-04-29T13:23:33.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 7
+                          links:
+                            self: 'http://localhost/api/v1/authors/7'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/55'
+                      -
+                        type: ticket
+                        id: 56
+                        attributes:
+                          title: 'eligendi quia labore'
+                          status: H
+                          createdAt: '2025-04-29T13:23:33.000000Z'
+                          updatedAt: '2025-04-29T13:23:33.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 8
+                          links:
+                            self: 'http://localhost/api/v1/authors/8'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/56'
+                      -
+                        type: ticket
+                        id: 57
+                        attributes:
+                          title: 'porro est ad'
+                          status: A
+                          createdAt: '2025-04-29T13:23:33.000000Z'
+                          updatedAt: '2025-04-29T13:23:33.000000Z'
+                        relationships:
+                          data:
+                            type: user
+                            id: 5
+                          links:
+                            self: 'http://localhost/api/v1/authors/5'
+                        links:
+                          self: 'http://localhost/api/v1/tickets/57'
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          example: ticket
+                        id:
+                          type: integer
+                          example: 103
+                        attributes:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                              example: dsadasd
+                            status:
+                              type: string
+                              example: A
+                            createdAt:
+                              type: string
+                              example: '2025-04-29T22:18:13.000000Z'
+                            updatedAt:
+                              type: string
+                              example: '2025-04-29T22:18:13.000000Z'
+                        relationships:
+                          type: object
+                          properties:
+                            data:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  example: user
+                                id:
+                                  type: integer
+                                  example: 1
+                            links:
+                              type: object
+                              properties:
+                                self:
+                                  type: string
+                                  example: 'http://localhost/api/v1/authors/1'
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                              example: 'http://localhost/api/v1/tickets/103'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://localhost/api/v1/tickets?page=1'
+                      last:
+                        type: string
+                        example: 'http://localhost/api/v1/tickets?page=7'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: 'http://localhost/api/v1/tickets?page=2'
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 7
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/tickets?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: 'http://localhost/api/v1/tickets?page=2'
+                            label: '2'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/tickets?page=3'
+                            label: '3'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/tickets?page=4'
+                            label: '4'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/tickets?page=5'
+                            label: '5'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/tickets?page=6'
+                            label: '6'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/tickets?page=7'
+                            label: '7'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/tickets?page=2'
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://localhost/api/v1/tickets'
+                      per_page:
+                        type: integer
+                        example: 15
+                      to:
+                        type: integer
+                        example: 15
+                      total:
+                        type: integer
+                        example: 102
+      tags:
+        - 'Manging Tickets'
+    post:
+      summary: 'Create a ticket'
+      operationId: createATicket
+      description: 'Creates a new ticket. Users can only create tickets for themselves. Managers can create tickets for any user.'
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Manging Tickets'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: ''
+                  example: []
+                  nullable: false
+                  properties:
+                    attributes:
+                      type: object
+                      description: ''
+                      example: []
+                      nullable: false
+                      properties:
+                        title:
+                          type: string
+                          description: "The ticket's title (method)."
+                          example: No-example
+                          nullable: false
+                        description:
+                          type: string
+                          description: "The ticket's description."
+                          example: No-example
+                          nullable: false
+                        status:
+                          type: string
+                          description: "The ticket's status."
+                          example: No-example
+                          nullable: false
+                          enum:
+                            - A
+                            - C
+                            - H
+                            - X
+                      required:
+                        - title
+                        - description
+                        - status
+                    relationships:
+                      type: object
+                      description: ''
+                      example: []
+                      nullable: false
+                      properties:
+                        author:
+                          type: object
+                          description: ''
+                          example: []
+                          nullable: false
+                          properties:
+                            data:
+                              type: object
+                              description: ''
+                              example: []
+                              nullable: false
+                              properties:
+                                id:
+                                  type: integer
+                                  description: 'The author assigned to the ticket. The <code>id</code> of an existing record in the users table.'
+                                  example: 0
+                                  nullable: false
+                              required:
+                                - id
+                          required:
+                            - data
+                      required:
+                        - author
+                  required:
+                    - attributes
+                    - relationships
+              required:
+                - data
