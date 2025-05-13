@@ -15,6 +15,11 @@ class Ticket extends Model
 
     // in case that create a new ticket, only can save the fields in the array
     protected $fillable = ['title','description','status','user_id'];
+    
+    // SENSITIVE DATA - SECURITY LARACAST COURSE
+    // example: there's a unique sensitive key attribute on each ticket, so to protect that data, just implements the code below:
+    // protected $hidden = ['key'];
+    // but this code is unusefull because the most safety way to protect data is create a resource response like TicketResource.
 
     public function author(): BelongsTo
     {

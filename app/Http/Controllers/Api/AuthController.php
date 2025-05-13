@@ -9,6 +9,9 @@ use App\Models\User;
 use App\Permissions\V1\Abilities;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -33,6 +36,8 @@ class AuthController extends Controller
 
     public function login(LoginUserRequest $request)
     {
+        $this->ensureIsNotRateLimited($request);
+
         // $request->validate($request->all()); <- not necesary because now I'm using LoginUserRequest
 
         if (!Auth::attempt($request->only('email', 'password'))) {
@@ -51,6 +56,8 @@ class AuthController extends Controller
                 // however, the expiration was modified in sanctum.php by default (expiration => 60*24*30)
             ]
         );
+
+        RateLimiter::clear($this->throttleKey($request));
     }
 
     /**
@@ -68,6 +75,23 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete(); // deletes the token of the current active session. when the user ends the session, the token will expire 
 
         return $this->ok('');
+    }
+
+    // SECURITY - RATE LIMITER
+    protected function ensureIsNotRateLimited(Request $request)
+    {
+        if (RateLimiter::tooManyAttempts($this->throttleKey($request), 5)) {
+            throw ValidationException::withMessages([
+                'email' => ['Too many attempts. Try again in ' . RateLimiter::availableIn($this->throttleKey($request)) . ' segundos.'],
+            ]);
+        }
+
+        RateLimiter::hit($this->throttleKey($request), 60);
+    }
+
+    protected function throttleKey(Request $request)
+    {
+        return Str::transliterate(Str::lower($request->input('email')));
     }
 
     // public function register() {
